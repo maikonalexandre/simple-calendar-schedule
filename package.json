@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": ""
+    "frontend": "cd packages/frontend/ && yarn dev",
+    "backend": "cd packages/backend/ && yarn dev"
   },
   "workspaces": ["packages/**"]
 }
