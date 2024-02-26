@@ -1,0 +1,11 @@
+{
+  "name": "tokenlab-2024",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": ""
+  },
+  "workspaces": ["packages/**"]
+}
