@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import { PaginationContextProvider } from './hooks/usePagination'
 import { MainLayout } from './pages/_layouts/main'
 import { Dashboard } from './pages/app/dashboard'
 import { SignIn } from './pages/auth/sign-in'
@@ -11,7 +12,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Dashboard />,
+        element: (
+          <PaginationContextProvider>
+            <Dashboard />
+          </PaginationContextProvider>
+        ),
       },
     ],
   },
