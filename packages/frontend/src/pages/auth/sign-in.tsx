@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 export function SignIn() {
   return (
     <div className="w-96 overflow-hidden rounded-md">
-      <div className="space-y-6 bg-zinc-800 p-6">
+      <div className="space-y-6 p-6 dark:bg-zinc-900">
         <div className="flex items-center gap-4">
           <Calendar />
           <h1>Calendar Schedule </h1>
@@ -17,12 +17,16 @@ export function SignIn() {
           <span>Faça seu login </span>
         </div>
 
-        <form id="login" className="space-y-2">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          id="login"
+          className="space-y-2"
+        >
           <Label htmlFor="name">Nome</Label>
-          <Input id="name" />
+          <Input className="dark:bg-zinc-800" id="name" />
 
           <Label htmlFor="password">Senha</Label>
-          <Input id="password" />
+          <Input className="dark:bg-zinc-800" id="password" />
         </form>
         <Button form="login" variant="ghost">
           Cadastrar
