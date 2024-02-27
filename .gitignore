@@ -5,3 +5,5 @@
 
 .vscode/*
 !.vscode/extensions.json
+
+/requirements.md
