@@ -19,13 +19,20 @@ export function Dashboard() {
       </div>
 
       <div className="flex w-full flex-col rounded bg-zinc-800 p-4">
-        <Pagination currentDate={new Date()} />
+        <Pagination />
 
         <Table className="w-full">
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[64px]"></TableHead>
-              <TableHead>Segunda</TableHead>
+            <TableRow className="grid grid-cols-7 items-center align-middle">
+              {/* <TableHead></TableHead> */}
+              <TableHead>
+                <div>
+                  <span>Seg</span>
+                </div>
+                <div>
+                  <span>24</span>
+                </div>
+              </TableHead>
               <TableHead>Terça</TableHead>
               <TableHead>Quarta</TableHead>
               <TableHead>Quinta</TableHead>
@@ -35,15 +42,20 @@ export function Dashboard() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {[1, 2, 3, 4, 5, 6, 7].map((invoice) => (
-              <TableRow className="" key={invoice}>
-                <TableCell className="p-3 text-sm">{invoice}</TableCell>
-                <TableCell className="p-3 text-sm"></TableCell>
-                <TableCell className="p-3 text-sm"></TableCell>{' '}
-                <TableCell className="p-3 text-sm"></TableCell>{' '}
-                <TableCell className="p-3 text-sm"></TableCell>{' '}
-                <TableCell className="p-3 text-sm"></TableCell>{' '}
-                <TableCell className="p-3 text-sm"></TableCell>{' '}
+            {[1, 8, 9, 2, 3, 4, 5, 6, 7].map((invoice) => (
+              <TableRow
+                key={invoice}
+                className="grid grid-cols-7 items-center justify-items-center align-middle"
+              >
+                {/* <TableCell className="flex h-full w-full p-3 text-sm">
+                  {invoice}
+                </TableCell> */}
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>{' '}
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>{' '}
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>{' '}
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>{' '}
+                <TableCell className="flex h-full w-full p-3 text-sm hover:bg-foreground"></TableCell>{' '}
                 <TableCell></TableCell>
               </TableRow>
             ))}
