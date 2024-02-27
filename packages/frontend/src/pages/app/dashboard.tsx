@@ -8,10 +8,10 @@ export function Dashboard() {
   return (
     <div className="flex gap-2 px-3">
       <div className="space-y-2">
-        <Calendar className="rounded bg-zinc-800" locale={ptBR} />
+        <Calendar className="rounded bg-card" locale={ptBR} />
       </div>
 
-      <div className="flex w-full flex-col gap-4 rounded bg-zinc-800 p-4">
+      <div className="flex w-full flex-col gap-4 rounded bg-card p-4">
         <Pagination />
         <CalendarTable />
       </div>
