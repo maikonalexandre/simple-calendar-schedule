@@ -1,7 +1,7 @@
 // import { getDate } from 'date-fns'
 
 import { usePagination } from '@/hooks/usePagination'
-import { getAllHoursOfDayFormatted, getWeek } from '@/utils/days'
+import { getAllHoursOfDayFormatted, getWeek } from '@/utils/index'
 
 import {
   Table,
