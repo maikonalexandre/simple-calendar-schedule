@@ -13,7 +13,7 @@ export function Pagination() {
       <div className="flex items-center gap-6 lg:gap-8">
         <div className="flex items-center gap-2">
           <Button
-            onClick={pagination.prevPage}
+            onClick={pagination.prevWeek}
             variant="ghost"
             className="h-8 w-8 p-0"
           >
@@ -21,12 +21,12 @@ export function Pagination() {
             <span className="sr-only">Página anterior</span>
           </Button>
           <div className="text-sm font-medium">
-            {format(pagination.page.startDate, 'MMM dd')} -{' '}
-            {format(pagination.page.endDate, 'dd MMM')} ,{' '}
-            {format(pagination.page.startDate, 'yyyy')}
+            {format(pagination.week.startDate, 'MMM dd')} -{' '}
+            {format(pagination.week.endDate, 'dd MMM')} ,{' '}
+            {format(pagination.week.startDate, 'yyyy')}
           </div>
           <Button
-            onClick={pagination.nextPage}
+            onClick={pagination.nextWeek}
             variant="ghost"
             className="h-8 w-8 p-0"
           >

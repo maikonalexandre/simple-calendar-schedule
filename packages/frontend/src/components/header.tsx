@@ -8,7 +8,7 @@ export function Header() {
         <span className="text-lg font-semibold">Dashboard</span>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm">usename</span>
+        <span className="text-sm">username</span>
         <User size={20} />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import {
+  addHours,
   eachDayOfInterval,
   eachHourOfInterval,
-  endOfDay,
   format,
   getDay,
   startOfDay,
@@ -27,13 +27,15 @@ function getDayOfTheWeek(data: Date) {
 }
 
 export function getAllHoursOfDayFormatted() {
-  const date = new Date()
-  const start = startOfDay(date)
-  const end = endOfDay(date)
+  const currentDate = new Date()
+  const start = addHours(startOfDay(currentDate), 6)
 
-  const hoursArray = eachHourOfInterval({ start, end }, { step: 1 })
+  const end = addHours(startOfDay(currentDate), 22)
 
-  const formattedHours = hoursArray.map((hour) => format(hour, 'HH:mm'))
+  const hoursInterval = eachHourOfInterval({
+    start,
+    end,
+  })
 
-  return formattedHours
+  return hoursInterval.map((hour) => format(hour, 'HH:mm'))
 }

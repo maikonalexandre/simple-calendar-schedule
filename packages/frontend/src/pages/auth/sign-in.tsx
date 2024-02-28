@@ -29,7 +29,10 @@ export function SignIn() {
           <Input className="dark:bg-zinc-800" id="password" />
         </form>
         <Button form="login" variant="ghost">
-          Cadastrar
+          Entrar
+        </Button>
+        <Button className="text-sm font-light " form="login" variant="link">
+          Criar uma nova conta
         </Button>
       </div>
 
