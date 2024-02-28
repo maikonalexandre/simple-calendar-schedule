@@ -43,21 +43,20 @@ export function CalendarTable() {
         </TableRow>
       </TableHeader>
       <TableBody className="h-full overflow-hidden">
-        {getAllHoursOfDayFormatted().map((invoice) => (
+        {getAllHoursOfDayFormatted().map((hour) => (
           <TableRow
-            key={invoice}
+            key={hour}
             className="flex items-center justify-items-center rounded border-none"
           >
             <TableHead className="h-full w-[64px] text-xs font-light">
-              {invoice}
+              {hour}
             </TableHead>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
-            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            {Array.from({ length: 7 }).map((_, i) => (
+              <TableCell
+                key={i}
+                className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"
+              />
+            ))}
           </TableRow>
         ))}
       </TableBody>
