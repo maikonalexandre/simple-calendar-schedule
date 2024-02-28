@@ -1,5 +1,7 @@
+// import { getDate } from 'date-fns'
+
 import { usePagination } from '@/hooks/usePagination'
-import { getWeek } from '@/utils/days'
+import { getAllHoursOfDayFormatted, getWeek } from '@/utils/days'
 
 import {
   Table,
@@ -11,41 +13,51 @@ import {
 } from './ui/table'
 
 export function CalendarTable() {
-  const { page } = usePagination()
-
-  const month = getWeek(page.startDate, page.endDate)
+  const { week } = usePagination()
+  const month = getWeek(week.startDate, week.endDate)
 
   return (
     <Table className="w-full">
       <TableHeader>
-        <TableRow className="flex items-center align-middle">
-          <TableHead className="w-8" />
+        <TableRow className="flex items-center rounded border-none align-middle">
+          <TableHead className="w-[64px]" />
           {month.map((e, i) => (
-            <TableHead className="flex-grow" key={`${e.dayOfTheWeek} + ${i}`}>
+            <TableHead
+              className="flex-grow border-none "
+              key={`${e.dayOfTheWeek} + ${i}`}
+            >
               <div>
                 <span>{e.dayOfTheWeek}</span>
               </div>
-              <div>
+              {
+                // TODO: CORRIGIR BUG MENSAL
+              }
+              <div
+                // data-today={Number(e.day) === getDate(new Date())}
+                className="flex h-5 w-5 items-center  justify-center rounded-full data-[today=true]:bg-sky-700"
+              >
                 <span>{e.day}</span>
               </div>
             </TableHead>
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody>
-        {[1, 2, 3].map((invoice) => (
+      <TableBody className="h-full overflow-hidden">
+        {getAllHoursOfDayFormatted().map((invoice) => (
           <TableRow
             key={invoice}
-            className="flex items-center justify-items-center p-0"
+            className="flex items-center justify-items-center rounded border-none"
           >
-            <TableCell className="h-full w-8 p-0 text-xs">{invoice}</TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
-            <TableCell className="h-full flex-grow text-xs hover:bg-accent"></TableCell>
+            <TableHead className="h-full w-[64px] text-xs font-light">
+              {invoice}
+            </TableHead>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
+            <TableCell className="hover:bg-accent h-full flex-grow rounded-md text-xs hover:bg-zinc-700"></TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -1,22 +1,30 @@
 import { addDays, subDays } from 'date-fns'
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-interface PaginationProps {
+interface WeekProps {
   startDate: Date
   endDate: Date
 }
 
 interface PaginationContextProps {
-  page: {
+  week: {
     startDate: Date
     endDate: Date
   }
-
-  prevPage: () => void
-  nextPage: () => void
+  prevWeek: () => void
+  nextWeek: () => void
+  goToSpecificWeek: (date: Date) => void
 }
 
 const PaginationContext = createContext({} as PaginationContextProps)
+
+const getSevenDaysInterval = (date: Date) => {
+  // subtraímos 2 e adicionamos 4 para o dia em questão ficar na 3 posição ta tabela
+  const startDate = subDays(date, 2)
+  const endDate = addDays(date, 4)
+
+  return { startDate, endDate }
+}
 
 export const PaginationContextProvider = ({
   children,
@@ -24,16 +32,15 @@ export const PaginationContextProvider = ({
   children: ReactNode
 }) => {
   const currentDate = new Date()
-  const defaultStartDate = subDays(currentDate, 2)
-  const defaultEndDate = addDays(currentDate, 4)
+  const { endDate, startDate } = getSevenDaysInterval(currentDate)
 
-  const [page, setPage] = useState<PaginationProps>({
-    endDate: defaultEndDate,
-    startDate: defaultStartDate,
+  const [week, setWeek] = useState<WeekProps>({
+    endDate,
+    startDate,
   })
 
-  function prevPage() {
-    setPage((prev) => {
+  const prevWeek = () => {
+    setWeek((prev) => {
       return {
         startDate: subDays(prev.startDate, 7),
         endDate: subDays(prev.endDate, 7),
@@ -41,8 +48,8 @@ export const PaginationContextProvider = ({
     })
   }
 
-  function nextPage() {
-    setPage((prev) => {
+  const nextWeek = () => {
+    setWeek((prev) => {
       return {
         startDate: addDays(prev.startDate, 7),
         endDate: addDays(prev.endDate, 7),
@@ -50,8 +57,20 @@ export const PaginationContextProvider = ({
     })
   }
 
+  const goToSpecificWeek = (date: Date) => {
+    const { endDate, startDate } = getSevenDaysInterval(date)
+    setWeek(() => {
+      return {
+        endDate,
+        startDate,
+      }
+    })
+  }
+
   return (
-    <PaginationContext.Provider value={{ page, nextPage, prevPage }}>
+    <PaginationContext.Provider
+      value={{ week, nextWeek, prevWeek, goToSpecificWeek }}
+    >
       {children}
     </PaginationContext.Provider>
   )
