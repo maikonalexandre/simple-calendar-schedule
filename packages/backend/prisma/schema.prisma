@@ -11,20 +11,24 @@ datasource db {
 }
 
 model User {
-  id             String  @id @unique @default(cuid())
-  email          String  @unique
-  name           String
-  password_hash  String 
+  id            String  @id @unique @default(cuid())
+  email         String  @unique
+  name          String
+  password_hash String
+  Event         Event[]
 
   @@map("users")
 }
 
 model Event {
-  id            String @id @unique @default(cuid())
-  date          DateTime
-  startedAt     DateTime
-  finalizedAd   DateTime
-  userId        String 
+  id          String   @id @unique @default(cuid())
+  name        String
+  date        DateTime
+  startedAt   DateTime
+  finalizedAd DateTime
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  description String
 
   @@map("events")
 }
