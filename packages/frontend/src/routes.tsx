@@ -5,6 +5,7 @@ import { PaginationContextProvider } from './hooks/usePagination'
 import { AuthLayout } from './pages/_layouts/auth'
 import { MainLayout } from './pages/_layouts/main'
 import { Dashboard } from './pages/app/dashboard'
+import { CreateAccount } from './pages/auth/create-account'
 import { SignIn } from './pages/auth/sign-in'
 
 export const router = createBrowserRouter([
@@ -28,6 +29,9 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AuthLayout />,
-    children: [{ path: '/sign-in', element: <SignIn /> }],
+    children: [
+      { path: '/sign-in', element: <SignIn /> },
+      { path: '/create-account', element: <CreateAccount /> },
+    ],
   },
 ])
