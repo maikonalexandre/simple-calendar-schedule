@@ -1,10 +1,15 @@
 import Fastify from 'fastify'
 import { ZodError } from 'zod'
 import { appRoutes } from './src/http/routes'
+import fastifyJwt from '@fastify/jwt'
+import { env } from './src/env'
 
 export const app = Fastify()
 
-// app.addHook('preHandler', auth)
+app.register(fastifyJwt, {
+  secret: env.JTW_HASH,
+})
+
 app.register(appRoutes)
 
 app.setErrorHandler((error, _, reply) => {
