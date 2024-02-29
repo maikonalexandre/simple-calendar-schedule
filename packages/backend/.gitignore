@@ -7,3 +7,4 @@ dist
 !.vscode/extensions.json
 /prisma/db
 /prisma/migrations
+/yarn-error.log
