@@ -5,3 +5,5 @@ dist
 
 .vscode/*
 !.vscode/extensions.json
+/prisma/db
+/prisma/migrations
