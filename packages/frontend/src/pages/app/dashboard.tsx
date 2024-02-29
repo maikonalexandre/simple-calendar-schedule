@@ -1,6 +1,6 @@
 import { ptBR } from 'date-fns/locale'
 
-import { EventsTable } from '@/components/eventsTable'
+import { EventsTable } from '@/components/events-table'
 import { Pagination } from '@/components/pagination'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'

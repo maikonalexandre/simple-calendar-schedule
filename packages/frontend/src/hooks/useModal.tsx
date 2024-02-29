@@ -11,7 +11,7 @@ type ModalProps = {
   data: handleModalData | undefined
 }
 interface ConfirmationProps {
-  openModal: (data: handleModalData) => void
+  openModal: (data?: handleModalData) => void
   closeModal: () => void
 }
 
@@ -23,7 +23,7 @@ export const ModalProvider = ({ children }: ProviderProps) => {
     data: undefined,
   })
 
-  const openModal = (data: handleModalData) => {
+  const openModal = (data?: handleModalData) => {
     setModalConfig(() => {
       return { visible: true, data }
     })

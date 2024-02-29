@@ -6,9 +6,9 @@ import { z } from 'zod'
 
 import { useModal } from '@/hooks/useModal'
 
-import { DatePickerDemo } from './date-picker'
+import { DatePicker } from './date-picker'
 import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogHeader } from './ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogHeader } from './ui/dialog'
 import { Input } from './ui/input'
 
 const schema = z
@@ -70,7 +70,8 @@ export function Modal({
   return (
     <Dialog open={visible}>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="bg-red-500">
+          <DialogClose className="bg-red-500" onClick={() => closeModal()} />
           <div className="flex items-center gap-4 align-middle text-zinc-200">
             <Calendar />
             <span className="unde font-semibold">Detalhes do evento</span>
@@ -82,7 +83,7 @@ export function Modal({
           className="mt-4 flex flex-col gap-2 text-zinc-50"
         >
           <Label className="text-sm font-medium">Data do evento:</Label>
-          <DatePickerDemo fieldValues={fieldState} />
+          <DatePicker fieldValues={fieldState} />
 
           <Label className="text-sm font-medium">Descrição do evento:</Label>
           <Input className="dark:bg-zinc-800" {...register('description')} />

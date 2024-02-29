@@ -36,7 +36,7 @@ export function SignIn() {
         </Button>
       </div>
 
-      <div className="h-1 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></div>
+      <div className="h-1 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
     </div>
   )
 }

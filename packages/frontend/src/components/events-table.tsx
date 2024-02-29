@@ -11,8 +11,13 @@ import {
   TableCell,
   TableHead,
   TableHeader,
+  TableRow as TableColumn,
   TableRow,
 } from './ui/table'
+
+export interface EventsTableProps {
+  dayOfTheWeek: [{ events: [] }]
+}
 
 export function EventsTable() {
   const { week } = usePagination()
@@ -42,7 +47,7 @@ export function EventsTable() {
       <TableBody className="grid h-full grid-cols-7 gap-2">
         {weekends.map((row, i) => {
           return (
-            <TableRow
+            <TableColumn
               key={`${row}-${i}`}
               className="flex flex-col items-center justify-items-center border-none dark:hover:bg-zinc-900"
             >
@@ -55,6 +60,7 @@ export function EventsTable() {
                         description: e.description,
                         endHour: 10,
                         startHour: 9,
+                        date: new Date(),
                       })
                     }}
                     className="m-1 h-7 w-full cursor-pointer items-center justify-center overflow-hidden overflow-ellipsis rounded-lg bg-zinc-800 py-2 text-xs font-medium"
@@ -64,7 +70,7 @@ export function EventsTable() {
                   </TableCell>
                 )
               })}
-            </TableRow>
+            </TableColumn>
           )
         })}
       </TableBody>
