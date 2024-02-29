@@ -22,8 +22,8 @@ export function SignIn() {
           id="login"
           className="space-y-2"
         >
-          <Label htmlFor="name">Nome</Label>
-          <Input className="dark:bg-zinc-800" id="name" />
+          <Label htmlFor="email">Email</Label>
+          <Input className="dark:bg-zinc-800" />
 
           <Label htmlFor="password">Senha</Label>
           <Input className="dark:bg-zinc-800" id="password" />
