@@ -1,41 +1,27 @@
-import {
-  addHours,
-  eachDayOfInterval,
-  eachHourOfInterval,
-  format,
-  getDay,
-  startOfDay,
-} from 'date-fns'
+import { eachDayOfInterval, format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
-export function getWeek(start: Date, end: Date) {
-  const daysInterval = eachDayOfInterval({
+export function getWeekInterval(start: Date, end: Date) {
+  return eachDayOfInterval({
     start,
     end,
   })
-
-  return daysInterval.map((day) => {
-    return {
-      day: format(day, 'dd'),
-      dayOfTheWeek: getDayOfTheWeek(day),
-    }
-  })
 }
 
-function getDayOfTheWeek(data: Date) {
-  const daysOfTheWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
-  return daysOfTheWeek[getDay(data)]
+export function formatDayShortVersion(date: Date) {
+  return format(date, 'EEE', { locale: ptBR }).slice(0, 3)
 }
 
-export function getAllHoursOfDayFormatted() {
-  const currentDate = new Date()
-  const start = addHours(startOfDay(currentDate), 6)
+// export function getAllHoursOfDayFormatted() {
+//   const currentDate = new Date()
+//   const start = addHours(startOfDay(currentDate), 6)
 
-  const end = addHours(startOfDay(currentDate), 22)
+//   const end = addHours(startOfDay(currentDate), 18)
 
-  const hoursInterval = eachHourOfInterval({
-    start,
-    end,
-  })
+//   const hoursInterval = eachHourOfInterval({
+//     start,
+//     end,
+//   })
 
-  return hoursInterval.map((hour) => format(hour, 'HH:mm'))
-}
+//   return hoursInterval.map((hour) => format(hour, 'HH:mm'))
+// }
