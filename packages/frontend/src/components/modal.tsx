@@ -8,7 +8,7 @@ import { useModal } from '@/hooks/useModal'
 
 import { DatePicker } from './date-picker'
 import { Button } from './ui/button'
-import { Dialog, DialogClose, DialogContent, DialogHeader } from './ui/dialog'
+import { Dialog, DialogContent, DialogHeader } from './ui/dialog'
 import { Input } from './ui/input'
 
 const schema = z
@@ -70,8 +70,7 @@ export function Modal({
   return (
     <Dialog open={visible}>
       <DialogContent>
-        <DialogHeader className="bg-red-500">
-          <DialogClose className="bg-red-500" onClick={() => closeModal()} />
+        <DialogHeader>
           <div className="flex items-center gap-4 align-middle text-zinc-200">
             <Calendar />
             <span className="unde font-semibold">Detalhes do evento</span>

@@ -33,7 +33,7 @@ export function CreateAccount() {
       <div className="space-y-6 p-6 dark:bg-zinc-900">
         <div className="flex items-center gap-4">
           <Calendar />
-          <h1>Calendar Schedule </h1>
+          <h1>Calendar Schedule</h1>
         </div>
 
         <div>
