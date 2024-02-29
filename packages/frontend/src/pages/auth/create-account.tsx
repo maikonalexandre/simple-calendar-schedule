@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Calendar } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -72,6 +73,12 @@ export function CreateAccount() {
         <Button form="create-account" type="submit">
           Criar conta
         </Button>
+        <Link
+          to="/sign-in"
+          className="ml-4 inline-block text-sm font-light hover:underline"
+        >
+          Fazer login
+        </Link>
       </div>
 
       <div className="h-1 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
