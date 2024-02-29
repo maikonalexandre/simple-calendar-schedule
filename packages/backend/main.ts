@@ -1,15 +1,6 @@
-import Fastify from 'fastify'
+import { app } from './app'
+import { env } from './src/env'
 
-const fastify = Fastify({
-  logger: false,
+app.listen({ host: '0.0.0.0', port: env.PORT }).then((address) => {
+  console.log(`✅ Server is running in port: ${address}`)
 })
-
-fastify.get('/', function (request, reply) {
-  reply.send({ hello: 'world' })
-})
-
-function start(err, address) {
-  console.log('✅ Server is running on:', address, err)
-}
-
-fastify.listen({ port: 3000 }, start)
