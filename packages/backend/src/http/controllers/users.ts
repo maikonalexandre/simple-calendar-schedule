@@ -20,8 +20,6 @@ export async function users(request: FastifyRequest, reply: FastifyReply) {
 
     await createUser.execute({ email, name, password })
   } catch (error) {
-    console.log('Algo deu errado', error)
-
     if (error instanceof UserAlreadyExistsError) {
       return reply.status(409).send({ message: error.message })
     }
