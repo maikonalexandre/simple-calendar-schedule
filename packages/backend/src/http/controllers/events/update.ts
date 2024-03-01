@@ -1,23 +1,32 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
-import { ListEventsUseCase } from '../../../use-cases/list-events'
+import { UpdateEventsUseCase } from '../../../use-cases/update-event'
 
 export async function listEvents(request: FastifyRequest, reply: FastifyReply) {
-  const list = z.object({
-    endDate: z.coerce.date(),
-    startedDate: z.coerce.date(),
+  const updateEventPropsSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    date: z.date(),
+    startedAt: z.date(),
+    finalizedAt: z.date(),
+    description: z.string(),
   })
 
-  const { endDate, startedDate } = list.parse(request.query)
+  const { date, description, finalizedAt, id, name, startedAt } =
+    updateEventPropsSchema.parse(request.query)
 
   try {
     const eventsRepository = new PrimaEventsRepository()
-    const listEventUseCase = new ListEventsUseCase(eventsRepository)
+    const listEventUseCase = new UpdateEventsUseCase(eventsRepository)
 
     const events = await listEventUseCase.execute({
-      endDate,
-      startedDate,
+      date,
+      description,
+      finalizedAt,
+      id,
+      name,
+      startedAt,
       userId: request.user.sub,
     })
 

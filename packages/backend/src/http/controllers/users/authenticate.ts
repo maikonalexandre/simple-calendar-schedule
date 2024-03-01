@@ -9,12 +9,12 @@ export async function authenticate(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const registerBodySchema = z.object({
+  const authenticateBodySchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
   })
 
-  const { email, password } = registerBodySchema.parse(request.body)
+  const { email, password } = authenticateBodySchema.parse(request.body)
 
   try {
     const usersRepository = new PrismaUsersRepository()

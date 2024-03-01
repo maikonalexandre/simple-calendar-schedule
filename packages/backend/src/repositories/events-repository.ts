@@ -1,5 +1,15 @@
 import { Prisma, Event } from '@prisma/client'
 
+interface updateEventProps {
+  id: string
+  name: string
+  date: Date
+  startedAt: Date
+  finalizedAt: Date
+  description: string
+  userId: string
+}
+
 export interface EventsRepository {
   create: (data: Prisma.EventCreateInput) => Promise<Event>
   findByDateInterval: (data: {
@@ -14,4 +24,5 @@ export interface EventsRepository {
     startedDate: Date
     endDate: Date
   }) => Promise<Event[] | void>
+  updateEvent: (data: updateEventProps) => Promise<Event | null>
 }

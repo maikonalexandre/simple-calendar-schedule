@@ -10,13 +10,13 @@ export class DeleteEventUseCase {
   constructor(private eventsRepository: EventsRepository) {}
 
   async execute({ id, userId }: DeleteEventProps) {
-    const event = await this.eventsRepository.findById(id, userId)
+    const event = await this.eventsRepository.findById({ id, userId })
 
     if (!event) {
       throw new EventNotFoundError()
     }
 
-    const deletedEvent = await this.eventsRepository.delete(id, userId)
+    const deletedEvent = await this.eventsRepository.delete({ id, userId })
 
     return deletedEvent
   }

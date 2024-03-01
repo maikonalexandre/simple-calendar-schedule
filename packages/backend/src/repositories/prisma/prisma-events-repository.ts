@@ -2,6 +2,16 @@ import { prisma } from '../../lib/prisma'
 import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../events-repository'
 
+interface updateEventProps {
+  id: string
+  name: string
+  date: Date
+  startedAt: Date
+  finalizedAt: Date
+  description: string
+  userId: string
+}
+
 export class PrimaEventsRepository implements EventsRepository {
   async findByDateInterval({
     finalizedAt,
@@ -15,7 +25,7 @@ export class PrimaEventsRepository implements EventsRepository {
     const event = await prisma.event.findFirst({
       where: {
         userId,
-        OR: [
+        AND: [
           {
             AND: [
               { startedAt: { lte: startedAt } },
@@ -88,5 +98,17 @@ export class PrimaEventsRepository implements EventsRepository {
       },
     })
     return events
+  }
+
+  async updateEvent(data: updateEventProps) {
+    const event = prisma.event.update({
+      where: {
+        id: data.id,
+        userId: data.userId,
+      },
+      data,
+    })
+
+    return event
   }
 }

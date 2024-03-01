@@ -8,11 +8,11 @@ export async function deleteEvent(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const createEventBodySchema = z.object({
+  const deleteEventBodySchema = z.object({
     id: z.string(),
   })
 
-  const { id } = createEventBodySchema.parse(request.body)
+  const { id } = deleteEventBodySchema.parse(request.body)
 
   try {
     const eventsRepository = new PrimaEventsRepository()
