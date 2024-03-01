@@ -15,7 +15,7 @@ model User {
   email         String  @unique
   name          String
   password_hash String
-  Event         Event[]
+  events        Event[]
 
   @@map("users")
 }
@@ -25,7 +25,7 @@ model Event {
   name        String
   date        DateTime
   startedAt   DateTime
-  finalizedAd DateTime
+  finalizedAt DateTime
   user        User     @relation(fields: [userId], references: [id])
   userId      String
   description String
