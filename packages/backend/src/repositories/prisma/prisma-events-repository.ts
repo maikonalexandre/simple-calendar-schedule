@@ -25,7 +25,7 @@ export class PrimaEventsRepository implements EventsRepository {
     const event = await prisma.event.findFirst({
       where: {
         userId,
-        AND: [
+        OR: [
           {
             AND: [
               { startedAt: { lte: startedAt } },
