@@ -26,11 +26,11 @@ export class CreateEventUseCase {
       id: userId,
     }
 
-    const event = await this.eventsRepository.findByDateInterval(
-      userId,
-      startedAt,
+    const event = await this.eventsRepository.findByDateInterval({
       finalizedAt,
-    )
+      startedAt,
+      userId,
+    })
 
     if (event) {
       throw new EventSubscribedError()

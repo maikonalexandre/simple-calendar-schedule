@@ -3,7 +3,15 @@ import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../events-repository'
 
 export class PrimaEventsRepository implements EventsRepository {
-  async findByDateInterval(userId: string, startedAt: Date, finalizedAt: Date) {
+  async findByDateInterval({
+    finalizedAt,
+    startedAt,
+    userId,
+  }: {
+    userId: string
+    startedAt: Date
+    finalizedAt: Date
+  }) {
     const event = await prisma.event.findFirst({
       where: {
         userId,
@@ -41,7 +49,7 @@ export class PrimaEventsRepository implements EventsRepository {
     return event
   }
 
-  async delete(id: string, userId: string) {
+  async delete({ id, userId }: { id: string; userId: string }) {
     const event = await prisma.event.delete({
       where: {
         id,
@@ -51,7 +59,7 @@ export class PrimaEventsRepository implements EventsRepository {
     return event
   }
 
-  async findById(id: string, userId: string) {
+  async findById({ id, userId }: { id: string; userId: string }) {
     const event = await prisma.event.findFirst({
       where: {
         id,
@@ -59,5 +67,26 @@ export class PrimaEventsRepository implements EventsRepository {
       },
     })
     return event
+  }
+
+  async findAllByUserId({
+    endDate,
+    startedDate,
+    userId,
+  }: {
+    userId: string
+    startedDate: Date
+    endDate: Date
+  }) {
+    const events = prisma.event.findMany({
+      where: {
+        userId,
+        startedAt: {
+          gte: startedDate,
+          lte: endDate,
+        },
+      },
+    })
+    return events
   }
 }
