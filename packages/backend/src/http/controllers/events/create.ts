@@ -3,15 +3,18 @@ import { z } from 'zod'
 import { CreateEventUseCase } from '../../../use-cases/create-event'
 import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
 import { EventSubscribedError } from '../../../use-cases/errors/event-subscribed-error'
+import { isAfter } from 'date-fns'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
-  const createEventBodySchema = z.object({
-    date: z.coerce.date(),
-    description: z.string(),
-    finalizedAt: z.coerce.date(),
-    name: z.string(),
-    startedAt: z.coerce.date(),
-  })
+  const createEventBodySchema = z
+    .object({
+      date: z.coerce.date(),
+      description: z.string(),
+      finalizedAt: z.coerce.date(),
+      name: z.string(),
+      startedAt: z.coerce.date(),
+    })
+    .refine(({ finalizedAt, startedAt }) => isAfter(finalizedAt, startedAt))
 
   const { date, description, finalizedAt, name, startedAt } =
     createEventBodySchema.parse(request.body)
