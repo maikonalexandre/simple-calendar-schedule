@@ -3,13 +3,30 @@ import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../events-repository'
 
 export class PrimaEventsRepository implements EventsRepository {
-  async findByDateInterval(startedAt: Date, finalizedAd: Date) {
+  async findByDateInterval(userId: string, startedAt: Date, finalizedAt: Date) {
     const event = await prisma.event.findFirst({
       where: {
-        startedAt: {
-          gte: startedAt,
-          lte: finalizedAd,
-        },
+        userId,
+        OR: [
+          {
+            AND: [
+              { startedAt: { lte: startedAt } },
+              { finalizedAt: { gte: startedAt } },
+            ],
+          },
+          {
+            AND: [
+              { startedAt: { lte: finalizedAt } },
+              { finalizedAt: { gte: finalizedAt } },
+            ],
+          },
+          {
+            AND: [
+              { startedAt: { gte: startedAt } },
+              { finalizedAt: { lte: finalizedAt } },
+            ],
+          },
+        ],
       },
     })
 
