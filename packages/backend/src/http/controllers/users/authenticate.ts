@@ -1,9 +1,9 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { PrismaUsersRepository } from '../../repositories/prisma/prisma-users-repository'
-import { AuthUseCase } from '../../use-cases/auth'
-import { UserCredentialsError } from '../../use-cases/errors/user-credentials-error'
+import { PrismaUsersRepository } from '../../../repositories/prisma/prisma-users-repository'
+import { AuthUseCase } from '../../../use-cases/auth'
+import { UserCredentialsError } from '../../../use-cases/errors/user-credentials-error'
 
 export async function authenticate(
   request: FastifyRequest,
@@ -20,7 +20,18 @@ export async function authenticate(
     const usersRepository = new PrismaUsersRepository()
     const authUseCase = new AuthUseCase(usersRepository)
 
-    await authUseCase.execute({ email, password })
+    const { user } = await authUseCase.execute({ email, password })
+
+    const token = await reply.jwtSign(
+      { name: user.name },
+      {
+        sign: {
+          sub: user.id,
+        },
+      },
+    )
+
+    reply.status(200).send({ message: token })
   } catch (error) {
     if (error instanceof UserCredentialsError) {
       return reply.status(400).send({ message: error.message })
@@ -28,6 +39,4 @@ export async function authenticate(
 
     throw error
   }
-
-  reply.status(200).send()
 }
