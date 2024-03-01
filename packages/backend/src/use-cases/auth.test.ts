@@ -32,7 +32,7 @@ describe('Auth Use Case', () => {
     expect(isHashedPassword).toBe(true)
   })
 
-  test('should not be able with wrong passoword', async () => {
+  test('should not be able with wrong password', async () => {
     const createUser = new CreateUserUseCase(usersRepository)
 
     await createUser.execute({
