@@ -1,4 +1,4 @@
-import { Prisma, Event } from '@prisma/client'
+import { Event } from '@prisma/client'
 
 interface updateEventProps {
   id: string
@@ -10,8 +10,17 @@ interface updateEventProps {
   userId: string
 }
 
+interface createEventProps {
+  name: string
+  date: Date
+  startedAt: Date
+  finalizedAt: Date
+  description: string
+  userId: string
+}
+
 export interface EventsRepository {
-  create: (data: Prisma.EventCreateInput) => Promise<Event>
+  create: (data: createEventProps) => Promise<Event>
   findByDateInterval: (data: {
     userId: string
     startedAt: Date

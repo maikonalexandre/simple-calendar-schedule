@@ -1,9 +1,17 @@
 import { prisma } from '../../lib/prisma'
-import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../events-repository'
 
 interface updateEventProps {
   id: string
+  name: string
+  date: Date
+  startedAt: Date
+  finalizedAt: Date
+  description: string
+  userId: string
+}
+
+interface createEventProps {
   name: string
   date: Date
   startedAt: Date
@@ -51,10 +59,8 @@ export class PrimaEventsRepository implements EventsRepository {
     return event
   }
 
-  async create(data: Prisma.EventCreateInput) {
-    const event = await prisma.event.create({
-      data,
-    })
+  async create(data: createEventProps) {
+    const event = await prisma.event.create({ data })
 
     return event
   }
