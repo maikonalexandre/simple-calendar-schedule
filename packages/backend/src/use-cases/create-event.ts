@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../repositories/events-repository'
 import { EventSubscribedError } from './errors/event-subscribed-error'
 
@@ -22,10 +21,6 @@ export class CreateEventUseCase {
     startedAt,
     userId,
   }: CreateEventProps) {
-    const filterUserById: Prisma.UserWhereUniqueInput = {
-      id: userId,
-    }
-
     const event = await this.eventsRepository.findByDateInterval({
       finalizedAt,
       startedAt,
@@ -36,15 +31,15 @@ export class CreateEventUseCase {
       throw new EventSubscribedError()
     }
 
-    await this.eventsRepository.create({
+    const createdEvent = await this.eventsRepository.create({
       date,
       description,
       finalizedAt,
       name,
       startedAt,
-      user: {
-        connect: filterUserById,
-      },
+      userId,
     })
+
+    return createdEvent
   }
 }
