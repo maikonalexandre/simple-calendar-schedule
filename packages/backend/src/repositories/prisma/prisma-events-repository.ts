@@ -40,4 +40,24 @@ export class PrimaEventsRepository implements EventsRepository {
 
     return event
   }
+
+  async delete(id: string, userId: string) {
+    const event = await prisma.event.delete({
+      where: {
+        id,
+        userId,
+      },
+    })
+    return event
+  }
+
+  async findById(id: string, userId: string) {
+    const event = await prisma.event.findFirst({
+      where: {
+        id,
+        userId,
+      },
+    })
+    return event
+  }
 }

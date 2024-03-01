@@ -1,7 +1,5 @@
 import { Prisma } from '@prisma/client'
 import { EventsRepository } from '../repositories/events-repository'
-import { UsersRepository } from '../repositories/users-repository'
-import { UserNotFoundError } from './errors/user-not-found-error'
 import { EventSubscribedError } from './errors/event-subscribed-error'
 
 interface CreateEventProps {
@@ -14,10 +12,7 @@ interface CreateEventProps {
 }
 
 export class CreateEventUseCase {
-  constructor(
-    private eventsRepository: EventsRepository,
-    private usersRepository: UsersRepository,
-  ) {}
+  constructor(private eventsRepository: EventsRepository) {}
 
   async execute({
     date,
@@ -27,14 +22,8 @@ export class CreateEventUseCase {
     startedAt,
     userId,
   }: CreateEventProps) {
-    const user = await this.usersRepository.findById(userId)
-    if (!user) {
-      throw new UserNotFoundError()
-    }
-
     const filterUserById: Prisma.UserWhereUniqueInput = {
-      id: user.id,
-      email: user.email,
+      id: userId,
     }
 
     const event = await this.eventsRepository.findByDateInterval(
