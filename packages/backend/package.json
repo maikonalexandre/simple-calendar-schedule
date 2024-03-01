@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx --env-file=.env ./main.ts"
+    "dev": "tsx --env-file=.env ./main.ts",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@fastify/jwt": "^8.0.0",
