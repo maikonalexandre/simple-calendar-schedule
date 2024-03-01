@@ -7,4 +7,6 @@ export interface EventsRepository {
     startedAt: Date,
     finalizedAt: Date,
   ) => Promise<Event | null>
+  delete: (id: string, userId: string) => Promise<Event | null>
+  findById: (id: string, userId: string) => Promise<Event | null>
 }
