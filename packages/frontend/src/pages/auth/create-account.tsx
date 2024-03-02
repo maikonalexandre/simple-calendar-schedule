@@ -53,58 +53,52 @@ export function CreateAccount() {
   }
 
   return (
-    <div className="w-96 overflow-hidden rounded-md">
-      <div className="space-y-6 p-6 dark:bg-zinc-900">
-        <div className="flex items-center gap-4">
-          <Calendar />
-          <h1>Calendar Schedule</h1>
-        </div>
-
-        <div>
-          <span>Crie sua conta</span>
-        </div>
-
-        <form
-          id="create-account"
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-2"
-        >
-          <Label htmlFor="name">Nome:</Label>
-          <Input id="name" className="dark:bg-zinc-800" {...register('name')} />
-          {errors.name && (
-            <p className="text-xs text-red-500" role="alert">
-              {errors.name.message}
-            </p>
-          )}
-
-          <Label>Email:</Label>
-          <Input className="dark:bg-zinc-800" {...register('email')} />
-          {errors.email && (
-            <p className="text-xs text-red-500" role="alert">
-              {errors.email.message}
-            </p>
-          )}
-
-          <Label>Senha:</Label>
-          <Input className="dark:bg-zinc-800" {...register('password')} />
-          {errors.password && (
-            <p className="text-xs text-red-500" role="alert">
-              {errors.password.message}
-            </p>
-          )}
-        </form>
-        <Button form="create-account" type="submit">
-          Criar conta
-        </Button>
-        <Link
-          to="/sign-in"
-          className="ml-4 inline-block text-sm font-light hover:underline"
-        >
-          Fazer login
-        </Link>
+    <div className="w-96 space-y-6 rounded-md p-6 dark:bg-zinc-900">
+      <div className="flex items-center gap-4">
+        <Calendar />
+        <h1>Calendar Schedule</h1>
       </div>
+      <span className="inline-block">Cadastre se</span>
 
-      <div className="h-1 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
+      <form
+        id="create-account"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-2"
+      >
+        <Label htmlFor="name">Nome:</Label>
+        <Input id="name" className="dark:bg-zinc-800" {...register('name')} />
+        {errors.name && (
+          <p className="text-xs text-red-500" role="alert">
+            {errors.name.message}
+          </p>
+        )}
+
+        <Label>Email:</Label>
+        <Input className="dark:bg-zinc-800" {...register('email')} />
+        {errors.email && (
+          <p className="text-xs text-red-500" role="alert">
+            {errors.email.message}
+          </p>
+        )}
+
+        <Label>Senha:</Label>
+        <Input className="dark:bg-zinc-800" {...register('password')} />
+        {errors.password && (
+          <p className="text-xs text-red-500" role="alert">
+            {errors.password.message}
+          </p>
+        )}
+      </form>
+      <Button form="create-account" type="submit">
+        Criar conta
+      </Button>
+      <Link
+        to="/sign-in"
+        className="ml-4 inline-block text-sm font-light hover:underline"
+      >
+        Fazer login
+      </Link>
+      <div className="h-1 w-full rounded bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
     </div>
   )
 }

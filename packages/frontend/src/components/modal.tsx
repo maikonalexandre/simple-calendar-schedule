@@ -25,13 +25,13 @@ const schema = z
         invalid_type_error: 'Precisa ser um numero',
         required_error: 'Voce precisa fornecer uma hora',
       })
-      .min(1, { message: 'Voce precisa fornecer uma horário válido' })
+      .min(0, { message: 'Voce precisa fornecer uma horário válido' })
       .max(24, { message: 'Voce precisa fornecer uma horário válido' }),
     endHour: z.coerce
       .number({
         invalid_type_error: 'Precisa ser um numero',
       })
-      .min(1, { message: 'Voce precisa fornecer uma horário válido' })
+      .min(0, { message: 'Voce precisa fornecer uma horário válido' })
       .max(24, { message: 'Voce precisa fornecer uma horário válido' }),
   })
   .refine((data) => !(data.endHour < data.startHour), {

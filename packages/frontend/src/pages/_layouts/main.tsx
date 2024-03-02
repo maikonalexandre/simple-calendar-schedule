@@ -5,7 +5,7 @@ import { Header } from '@/components/header'
 import { useAuth } from '@/hooks/useAuth'
 
 export function MainLayout() {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading, signOut } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -15,13 +15,13 @@ export function MainLayout() {
   }, [user, navigate, isLoading])
 
   return (
-    <div className="h-screen w-full bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+    <div className="mb-4 min-h-screen w-full bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
       <div className="flex h-full">
         {user && (
           <>
-            <div className="h-full w-1 bg-gradient-to-t from-green-300 via-blue-500 to-purple-600" />
-            <div className="h-full w-full">
-              <Header username={user.name} />
+            <div className="flex min-h-screen w-1 bg-gradient-to-t from-green-300 via-blue-500 to-purple-600 sm:m-0" />
+            <div className="mb-4 h-full w-full">
+              <Header username={user.name} onClick={signOut} />
               <Outlet />
             </div>
           </>
