@@ -33,7 +33,7 @@ export class InMemoryEventsRepository implements EventsRepository {
       description: data.description,
     }
 
-    this.events.push()
+    this.events.push(event)
 
     return event
   }
@@ -89,7 +89,10 @@ export class InMemoryEventsRepository implements EventsRepository {
   }
 
   async findById(data: { id: string; userId: string }) {
-    const event = this.events.find((event) => event.id === data.id) || null
+    const event =
+      this.events.find(
+        (event) => event.id === data.id && event.userId === data.userId,
+      ) || null
 
     return event
   }
