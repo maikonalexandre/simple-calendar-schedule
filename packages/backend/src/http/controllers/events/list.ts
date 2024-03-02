@@ -28,7 +28,7 @@ export async function listEvents(request: FastifyRequest, reply: FastifyReply) {
 
     const daysInterval = getWeekInterval(startedDate, endDate)
 
-    if (events && events.length > 1) {
+    if (events && events.length > 0) {
       const refactoredEventsByDaysInterval = daysInterval.map((day) => {
         const dayEvents = events.filter(
           (event) =>
