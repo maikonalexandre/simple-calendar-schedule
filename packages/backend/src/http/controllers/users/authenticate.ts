@@ -32,7 +32,10 @@ export async function authenticate(
       },
     )
 
-    reply.status(200).send({ message: token })
+    reply.status(200).send({
+      user: { name: user.name, email: user.email },
+      token,
+    })
   } catch (error) {
     if (error instanceof UserCredentialsError) {
       return reply.status(400).send({ message: error.message })

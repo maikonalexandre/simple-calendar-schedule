@@ -38,10 +38,10 @@ export async function listEvents(request: FastifyRequest, reply: FastifyReply) {
         return { day, eventos: dayEvents }
       })
 
-      reply.code(200).send({ message: refactoredEventsByDaysInterval })
+      reply.code(200).send(refactoredEventsByDaysInterval)
     }
 
-    reply.status(200).send({ message: events })
+    reply.status(200).send(events)
   } catch (error) {
     console.log(error)
 
