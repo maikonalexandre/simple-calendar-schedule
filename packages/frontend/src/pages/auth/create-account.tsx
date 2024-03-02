@@ -1,9 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { Calendar } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { registerUser } from '@/_api/register'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -25,8 +29,27 @@ export function CreateAccount() {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data)
+  const { mutateAsync: createAccount } = useMutation({
+    mutationFn: registerUser,
+  })
+
+  const navigate = useNavigate()
+
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    try {
+      const response = await createAccount(data)
+
+      if (response.status === 201) {
+        toast.success('Cadastro feito com sucesso')
+        navigate('/sign-in')
+      }
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 409) {
+        return toast.error('Já existe um usuário cadastrado com esse email!')
+      }
+
+      toast.error('Ouve um erro ao criar usuário!')
+    }
   }
 
   return (
