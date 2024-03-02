@@ -1,12 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { Calendar } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useAuth } from '@/hooks/useAuth'
 
 const schema = z.object({
   email: z.string().email({ message: 'Insira um email válido' }),
@@ -22,8 +25,20 @@ export function SignIn() {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data)
+  const { signIn, isLoading } = useAuth()
+  const navigate = useNavigate()
+
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    try {
+      await signIn(data.email, data.password)
+      navigate('/')
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        return toast.error('Credenciais inválidas!')
+      }
+
+      toast.error('Não foi possível realizar o login!')
+    }
   }
   return (
     <div className="w-96 overflow-hidden rounded-md">
@@ -31,10 +46,7 @@ export function SignIn() {
         <div className="flex items-center gap-4">
           <Calendar />
           <h1>Calendar Schedule </h1>
-        </div>
-
-        <div>
-          <span>Faça seu login </span>
+          <span className="inline-block text-sm">Faça seu login</span>
         </div>
 
         <form
@@ -62,12 +74,12 @@ export function SignIn() {
             </p>
           )}
         </form>
-        <Button form="login" variant="ghost">
+        <Button disabled={isLoading} form="login">
           Entrar
         </Button>
         <Link
           to="/create-account"
-          className="ml-2 inline-block text-sm font-light hover:underline"
+          className="ml-4 inline-block text-sm font-light hover:underline"
         >
           Criar uma nova conta
         </Link>
