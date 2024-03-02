@@ -4,11 +4,17 @@ import { appRoutes } from './src/http/controllers/users/routes'
 import fastifyJwt from '@fastify/jwt'
 import { env } from './src/env'
 import { eventRoutes } from './src/http/controllers/events/routes'
+import cors from '@fastify/cors'
 
 export const app = Fastify()
 
 app.register(fastifyJwt, {
   secret: env.JTW_HASH,
+})
+
+app.register(cors, {
+  origin: '*',
+  methods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
 })
 
 app.register(appRoutes)
