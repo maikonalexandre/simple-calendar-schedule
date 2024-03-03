@@ -9,8 +9,6 @@ export async function updateEvents(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  console.log('REQ', request.body)
-
   const updateEventPropsSchema = z
     .object({
       id: z.string(),
