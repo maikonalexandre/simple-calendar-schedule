@@ -1,4 +1,4 @@
-import { addDays, subDays } from 'date-fns'
+import { addDays, startOfDay, subDays } from 'date-fns'
 import { createContext, ReactNode, useContext, useState } from 'react'
 
 interface WeekProps {
@@ -31,7 +31,7 @@ export const PaginationContextProvider = ({
 }: {
   children: ReactNode
 }) => {
-  const currentDate = new Date()
+  const currentDate = startOfDay(new Date())
   const { endDate, startDate } = getSevenDaysInterval(currentDate)
 
   const [week, setWeek] = useState<WeekProps>({
