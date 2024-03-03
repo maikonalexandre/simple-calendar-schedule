@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
  
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type=time]::-webkit-datetime-edit-text {
+    padding: 0px 2px 0px 2px;
+}
+
+input[type=time]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+    align-items: center;
+}
