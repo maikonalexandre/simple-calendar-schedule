@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
-import { Calendar } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { FormContainer } from '@/components/form-container'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -41,15 +41,9 @@ export function SignIn() {
     }
   }
   return (
-    <div className="w-96 space-y-6 rounded-md p-6 dark:bg-zinc-900">
-      <div className="flex items-center gap-4">
-        <Calendar />
-        <h1>Calendar Schedule </h1>
-      </div>
-      <span className="inline-block">Faça seu login</span>
-
+    <FormContainer subtitle="sign-in">
       <form onSubmit={handleSubmit(onSubmit)} id="login" className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label>Email</Label>
         <Input className="dark:bg-zinc-800" {...register('email')} />
         {errors.email && (
           <p className="text-xs text-red-500" role="alert">
@@ -57,12 +51,8 @@ export function SignIn() {
           </p>
         )}
 
-        <Label htmlFor="password">Senha</Label>
-        <Input
-          {...register('password')}
-          className="dark:bg-zinc-800"
-          id="password"
-        />
+        <Label>Senha</Label>
+        <Input {...register('password')} className="dark:bg-zinc-800" />
         {errors.password && (
           <p className="text-xs text-red-500" role="alert">
             {errors.password.message}
@@ -74,11 +64,10 @@ export function SignIn() {
       </Button>
       <Link
         to="/create-account"
-        className="ml-4 inline-block text-sm font-light hover:underline"
+        className="ml-4 inline-block text-sm hover:underline"
       >
         Criar uma nova conta
       </Link>
-      <div className="h-1 w-full rounded bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
-    </div>
+    </FormContainer>
   )
 }

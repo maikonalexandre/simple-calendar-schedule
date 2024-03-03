@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { Calendar } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { registerUser } from '@/_api/register'
+import { FormContainer } from '@/components/form-container'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -17,7 +17,7 @@ const schema = z.object({
   email: z.string().email({ message: 'Preencha com um email válido' }),
   password: z
     .string()
-    .min(6, { message: 'A senha deve ter no minimo 6 digitos' }),
+    .min(6, { message: 'A senha deve ter no mínimo 6 dígitos' }),
 })
 
 export function CreateAccount() {
@@ -53,19 +53,13 @@ export function CreateAccount() {
   }
 
   return (
-    <div className="w-96 space-y-6 rounded-md p-6 dark:bg-zinc-900">
-      <div className="flex items-center gap-4">
-        <Calendar />
-        <h1>Calendar Schedule</h1>
-      </div>
-      <span className="inline-block">Cadastre se</span>
-
+    <FormContainer subtitle="Sign in">
       <form
         id="create-account"
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2"
       >
-        <Label htmlFor="name">Nome:</Label>
+        <Label>Nome:</Label>
         <Input id="name" className="dark:bg-zinc-800" {...register('name')} />
         {errors.name && (
           <p className="text-xs text-red-500" role="alert">
@@ -92,13 +86,9 @@ export function CreateAccount() {
       <Button form="create-account" type="submit">
         Criar conta
       </Button>
-      <Link
-        to="/sign-in"
-        className="ml-4 inline-block text-sm font-light hover:underline"
-      >
+      <Link to="/sign-in" className="ml-4 inline-block text-sm hover:underline">
         Fazer login
       </Link>
-      <div className="h-1 w-full rounded bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
-    </div>
+    </FormContainer>
   )
 }
