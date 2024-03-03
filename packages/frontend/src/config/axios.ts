@@ -1,7 +1,9 @@
 import axios, { AxiosRequestHeaders } from 'axios'
 
+import { env } from './env'
+
 export const api = axios.create({
-  baseURL: `${import.meta.env.VITE_BASE_URL}`,
+  baseURL: env.VITE_API_URL,
 })
 
 api.interceptors.request.use(async (req) => {
@@ -18,10 +20,12 @@ api.interceptors.request.use(async (req) => {
   return req
 })
 
-api.interceptors.request.use(async (config) => {
-  await new Promise((resolve) =>
-    setTimeout(resolve, Math.round(Math.random() * 3000)),
-  )
+if (env.VITE_ENABLE_API_DELAY) {
+  api.interceptors.request.use(async (config) => {
+    await new Promise((resolve) =>
+      setTimeout(resolve, Math.round(Math.random() * 3000)),
+    )
 
-  return config
-})
+    return config
+  })
+}
