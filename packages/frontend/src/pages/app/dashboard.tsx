@@ -4,8 +4,8 @@ import { ptBR } from 'date-fns/locale'
 import { toast } from 'sonner'
 
 import { createEvent } from '@/_api/create-event'
+import { EventForm, handleModalData } from '@/components/event-form'
 import { Pagination } from '@/components/pagination'
-import { handleModalData, Test } from '@/components/test'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -87,7 +87,7 @@ export function Dashboard() {
           </DialogTrigger>
 
           <DialogContent>
-            <Test formId="create-event" onSubmit={onSubmit} />
+            <EventForm formId="create-event" onSubmit={onSubmit} />
             <div className="flex justify-end gap-4 py-4">
               <Button
                 form="create-event"
