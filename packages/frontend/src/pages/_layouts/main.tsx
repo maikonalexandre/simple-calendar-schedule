@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import { Header } from '@/components/header'
+import { Navbar } from '@/components/navbar'
 import { GradientBar } from '@/components/ui/gradientbar'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -22,7 +22,7 @@ export function MainLayout() {
           <>
             <GradientBar className="flex min-h-screen w-1 bg-gradient-to-t sm:m-0" />
             <div className="mb-4 h-full w-full">
-              <Header username={user.name} onClick={signOut} />
+              <Navbar username={user.name} onClick={signOut} />
               <Outlet />
             </div>
           </>

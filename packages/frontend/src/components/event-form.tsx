@@ -54,15 +54,15 @@ export type EventFormData = z.infer<typeof schema>
 export function EventForm({
   formId,
   onSubmit,
-  values,
+  defaultValues,
 }: {
   onSubmit: (data: EventFormData) => void
-  values?: EventFormData
+  defaultValues?: EventFormData
   formId: string
 }) {
   const fieldState = useForm<EventFormData>({
     resolver: zodResolver(schema),
-    values,
+    values: defaultValues,
   })
 
   const {

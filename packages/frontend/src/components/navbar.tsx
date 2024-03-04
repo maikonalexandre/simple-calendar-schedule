@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 
-export function Header({
+export function Navbar({
   username,
   onClick,
 }: {
