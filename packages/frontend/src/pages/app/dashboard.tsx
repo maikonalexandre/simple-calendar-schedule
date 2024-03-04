@@ -1,14 +1,21 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { ptBR } from 'date-fns/locale'
+import { Calendar as CalendarIcon } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { createEvent } from '@/_api/create-event'
-import { EventForm, handleModalData } from '@/components/event-form'
+import { EventForm, EventFormData } from '@/components/event-form'
 import { Pagination } from '@/components/pagination'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { GradientBar } from '@/components/ui/gradientbar'
 import { WeekView } from '@/components/week-view'
 import { queryClient } from '@/config/react-query'
 import { usePagination } from '@/hooks/usePagination'
@@ -35,7 +42,7 @@ export function Dashboard() {
     endHour,
     name,
     startHour,
-  }: handleModalData) => {
+  }: EventFormData) => {
     const [startedHours, startedMinutes] = startHour.split(':')
     const [endHours, endMinutes] = endHour.split(':')
 
@@ -87,7 +94,14 @@ export function Dashboard() {
           </DialogTrigger>
 
           <DialogContent>
+            <DialogHeader>
+              <div className="flex items-center gap-4 align-middle text-zinc-200">
+                <CalendarIcon />
+                <span className="unde font-semibold">Adicionar evento</span>
+              </div>
+            </DialogHeader>
             <EventForm formId="create-event" onSubmit={onSubmit} />
+
             <div className="flex justify-end gap-4 py-4">
               <Button
                 form="create-event"
@@ -97,7 +111,7 @@ export function Dashboard() {
                 Confirmar
               </Button>
             </div>
-            <div className="h-1 w-full rounded bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
+            <GradientBar />
           </DialogContent>
         </Dialog>
 
@@ -112,6 +126,7 @@ export function Dashboard() {
 
       <div className="flex w-full flex-col gap-4 rounded p-4 dark:bg-zinc-900">
         <Pagination />
+
         <WeekView />
       </div>
     </div>

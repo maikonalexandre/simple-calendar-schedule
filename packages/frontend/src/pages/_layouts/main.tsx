@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import { Header } from '@/components/header'
+import { GradientBar } from '@/components/ui/gradientbar'
 import { useAuth } from '@/hooks/useAuth'
 
 export function MainLayout() {
@@ -19,7 +20,7 @@ export function MainLayout() {
       <div className="flex h-full">
         {user && (
           <>
-            <div className="flex min-h-screen w-1 bg-gradient-to-t from-green-300 via-blue-500 to-purple-600 sm:m-0" />
+            <GradientBar className="flex min-h-screen w-1 bg-gradient-to-t sm:m-0" />
             <div className="mb-4 h-full w-full">
               <Header username={user.name} onClick={signOut} />
               <Outlet />

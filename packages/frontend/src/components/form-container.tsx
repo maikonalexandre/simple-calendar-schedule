@@ -2,6 +2,8 @@ import { Calendar } from 'lucide-react'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
+import { GradientBar } from './ui/gradientbar'
+
 interface FormContainerProps {
   children: ReactNode
   subtitle: string
@@ -28,7 +30,7 @@ export const FormContainer = ({
 
       {children}
 
-      <div className="h-1 w-full rounded bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
+      <GradientBar />
     </div>
   )
 }

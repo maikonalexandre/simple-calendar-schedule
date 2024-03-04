@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { format, isToday } from 'date-fns'
-import { Trash } from 'lucide-react'
+import { Calendar as CalendarIcon, Trash } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { listEvents } from '@/_api/list-events'
@@ -15,9 +15,16 @@ import {
   getWeekInterval,
 } from '@/utils'
 
-import { EventForm, onSubmitModalData } from './event-form'
+import { EventForm, EventFormData } from './event-form'
 import { Button } from './ui/button'
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from './ui/dialog'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from './ui/dialog'
+import { GradientBar } from './ui/gradientbar'
 
 export interface Event {
   id: string
@@ -32,6 +39,10 @@ export interface Event {
 export interface Root {
   day: string
   events: Event[]
+}
+
+interface onSubmitEventFormData extends EventFormData {
+  id: string
 }
 
 export function WeekView() {
@@ -78,7 +89,7 @@ export function WeekView() {
     name,
     startHour,
     id,
-  }: onSubmitModalData) => {
+  }: onSubmitEventFormData) => {
     const [startedHours, startedMinutes] = startHour.split(':')
     const [endHours, endMinutes] = endHour.split(':')
 
@@ -162,6 +173,14 @@ export function WeekView() {
                         </button>
                       </DialogTrigger>
                       <DialogContent>
+                        <DialogHeader>
+                          <div className="flex items-center gap-4 align-middle text-zinc-200">
+                            <CalendarIcon />
+                            <span className="unde font-semibold">
+                              Detalhes do evento
+                            </span>
+                          </div>
+                        </DialogHeader>
                         <EventForm
                           formId={event.id}
                           values={{
@@ -171,7 +190,7 @@ export function WeekView() {
                             endHour: format(event.finalizedAt, 'HH:mm'),
                             startHour: format(event.startedAt, 'HH:mm'),
                           }}
-                          onSubmit={async (data) =>
+                          onSubmit={async (data: EventFormData) =>
                             onSubmit({
                               id: event.id,
                               name: data.name,
@@ -203,6 +222,7 @@ export function WeekView() {
                             </Button>
                           </DialogClose>
                         </div>
+                        <GradientBar />
                       </DialogContent>
                     </Dialog>
                   </div>
