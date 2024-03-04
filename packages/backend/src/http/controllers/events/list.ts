@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
-import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
+import { prismaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
 import { ListEventsUseCase } from '../../../use-cases/list-events'
 import { getWeekInterval } from '../../../utils'
 
@@ -17,8 +17,7 @@ export async function listEvents(request: FastifyRequest, reply: FastifyReply) {
   const { endDate, startedDate } = list.parse(request.query)
 
   try {
-    const eventsRepository = new PrimaEventsRepository()
-    const listEventUseCase = new ListEventsUseCase(eventsRepository)
+    const listEventUseCase = new ListEventsUseCase(prismaEventsRepository)
 
     const events = await listEventUseCase.execute({
       endDate,

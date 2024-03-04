@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
-import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
+import { prismaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
 import { DeleteEventUseCase } from '../../../use-cases/delete-event'
 import { EventNotFoundError } from '../../../use-cases/errors/event-not-found-error'
 
@@ -15,8 +15,7 @@ export async function deleteEvent(
   const { id } = deleteEventBodySchema.parse(request.body)
 
   try {
-    const eventsRepository = new PrimaEventsRepository()
-    const deleteEventUseCase = new DeleteEventUseCase(eventsRepository)
+    const deleteEventUseCase = new DeleteEventUseCase(prismaEventsRepository)
 
     await deleteEventUseCase.execute({
       id,

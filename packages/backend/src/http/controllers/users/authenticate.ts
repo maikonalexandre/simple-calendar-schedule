@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { PrismaUsersRepository } from '../../../repositories/prisma/prisma-users-repository'
+import { prismaUsersRepository } from '../../../repositories/prisma/prisma-users-repository'
 import { AuthUseCase } from '../../../use-cases/auth'
 import { UserCredentialsError } from '../../../use-cases/errors/user-credentials-error'
 
@@ -17,9 +17,7 @@ export async function authenticate(
   const { email, password } = authenticateBodySchema.parse(request.body)
 
   try {
-    const usersRepository = new PrismaUsersRepository()
-    const authUseCase = new AuthUseCase(usersRepository)
-
+    const authUseCase = new AuthUseCase(prismaUsersRepository)
     const { user } = await authUseCase.execute({ email, password })
 
     const token = await reply.jwtSign(

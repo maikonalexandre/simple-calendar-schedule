@@ -31,3 +31,5 @@ export class PrismaUsersRepository implements UsersRepository {
     return user
   }
 }
+
+export const prismaUsersRepository = new PrismaUsersRepository()

@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 import { CreateEventUseCase } from '../../../use-cases/create-event'
-import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
+import { prismaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
 import { EventSubscribedError } from '../../../use-cases/errors/event-subscribed-error'
 import { isAfter } from 'date-fns'
 
@@ -20,8 +20,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     createEventBodySchema.parse(request.body)
 
   try {
-    const eventsRepository = new PrimaEventsRepository()
-    const createEvent = new CreateEventUseCase(eventsRepository)
+    const createEvent = new CreateEventUseCase(prismaEventsRepository)
 
     await createEvent.execute({
       date,

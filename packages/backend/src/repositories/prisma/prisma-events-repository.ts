@@ -20,7 +20,7 @@ interface createEventProps {
   userId: string
 }
 
-export class PrimaEventsRepository implements EventsRepository {
+export class PrismaEventsRepository implements EventsRepository {
   async findByDateInterval({
     finalizedAt,
     startedAt,
@@ -118,3 +118,5 @@ export class PrimaEventsRepository implements EventsRepository {
     return event
   }
 }
+
+export const prismaEventsRepository = new PrismaEventsRepository()

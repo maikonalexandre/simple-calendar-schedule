@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
-import { PrimaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
+import { prismaEventsRepository } from '../../../repositories/prisma/prisma-events-repository'
 import { UpdateEventsUseCase } from '../../../use-cases/update-event'
 import { isAfter } from 'date-fns'
 import { EventNotFoundError } from '../../../use-cases/errors/event-not-found-error'
@@ -24,8 +24,7 @@ export async function updateEvents(
     updateEventPropsSchema.parse(request.body)
 
   try {
-    const eventsRepository = new PrimaEventsRepository()
-    const listEventUseCase = new UpdateEventsUseCase(eventsRepository)
+    const listEventUseCase = new UpdateEventsUseCase(prismaEventsRepository)
 
     const events = await listEventUseCase.execute({
       date,
