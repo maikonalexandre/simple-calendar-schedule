@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { ModalProvider } from './hooks/useModal'
 import { PaginationContextProvider } from './hooks/usePagination'
 import { AuthLayout } from './pages/_layouts/auth'
 import { MainLayout } from './pages/_layouts/main'
@@ -16,11 +15,9 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: (
-          <ModalProvider>
-            <PaginationContextProvider>
-              <Dashboard />
-            </PaginationContextProvider>
-          </ModalProvider>
+          <PaginationContextProvider>
+            <Dashboard />
+          </PaginationContextProvider>
         ),
       },
     ],
