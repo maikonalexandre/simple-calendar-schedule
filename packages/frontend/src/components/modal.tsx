@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Label } from '@radix-ui/react-label'
 import { Calendar, Trash } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -10,6 +9,7 @@ import { DatePicker } from './date-picker'
 import { Button } from './ui/button'
 import { Dialog, DialogContent, DialogHeader } from './ui/dialog'
 import { Input } from './ui/input'
+import { Label } from './ui/label'
 
 const schema = z
   .object({
@@ -63,7 +63,7 @@ export function Modal({
 
   function handleDelete() {}
   function onSubmit(handleData: handleModalData) {
-    console.log('[DATA]', data, 'HALDEDATA', handleData)
+    console.log('[DATA]', data, '', handleData)
     closeModal()
   }
 
@@ -76,7 +76,6 @@ export function Modal({
             <span className="unde font-semibold">Detalhes do evento</span>
           </div>
         </DialogHeader>
-
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mt-4 flex flex-col gap-2 text-zinc-50"
