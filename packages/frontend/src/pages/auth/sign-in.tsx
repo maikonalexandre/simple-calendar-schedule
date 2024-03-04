@@ -5,8 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { FormContainer } from '@/components/form-container'
+import { SimpleHeader } from '@/components/simple-header'
 import { Button } from '@/components/ui/button'
+import { GradientBar } from '@/components/ui/gradientbar'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/hooks/useAuth'
@@ -41,7 +42,8 @@ export function SignIn() {
     }
   }
   return (
-    <FormContainer subtitle="sign-in">
+    <div className="w-96 space-y-6 rounded-md p-6 dark:bg-zinc-900">
+      <SimpleHeader title="Faça seu log-in" />
       <form onSubmit={handleSubmit(onSubmit)} id="login" className="space-y-2">
         <Label>Email</Label>
         <Input className="dark:bg-zinc-800" {...register('email')} />
@@ -68,6 +70,7 @@ export function SignIn() {
       >
         Criar uma nova conta
       </Link>
-    </FormContainer>
+      <GradientBar />
+    </div>
   )
 }

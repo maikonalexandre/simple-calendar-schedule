@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { format, isToday } from 'date-fns'
-import { Calendar as CalendarIcon, Trash } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { listEvents } from '@/_api/list-events'
@@ -16,6 +16,7 @@ import {
 } from '@/utils'
 
 import { EventForm, EventFormData } from './event-form'
+import { SimpleHeader } from './simple-header'
 import { Button } from './ui/button'
 import {
   Dialog,
@@ -174,16 +175,11 @@ export function WeekView() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <div className="flex items-center gap-4 align-middle text-zinc-200">
-                            <CalendarIcon />
-                            <span className="unde font-semibold">
-                              Detalhes do evento
-                            </span>
-                          </div>
+                          <SimpleHeader title="Detalhes do evento" />
                         </DialogHeader>
                         <EventForm
                           formId={event.id}
-                          values={{
+                          defaultValues={{
                             name: event.name,
                             date: new Date(event.date),
                             description: event.description,

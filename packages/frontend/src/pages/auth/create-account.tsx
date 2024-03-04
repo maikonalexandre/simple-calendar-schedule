@@ -7,8 +7,9 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { registerUser } from '@/_api/register'
-import { FormContainer } from '@/components/form-container'
+import { SimpleHeader } from '@/components/simple-header'
 import { Button } from '@/components/ui/button'
+import { GradientBar } from '@/components/ui/gradientbar'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -53,7 +54,8 @@ export function CreateAccount() {
   }
 
   return (
-    <FormContainer subtitle="Sign in">
+    <div className="w-96 space-y-6 rounded-md p-6 dark:bg-zinc-900">
+      <SimpleHeader title="Criar nova conta" />
       <form
         id="create-account"
         onSubmit={handleSubmit(onSubmit)}
@@ -89,6 +91,7 @@ export function CreateAccount() {
       <Link to="/sign-in" className="ml-4 inline-block text-sm hover:underline">
         Fazer login
       </Link>
-    </FormContainer>
+      <GradientBar />
+    </div>
   )
 }

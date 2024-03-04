@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { ptBR } from 'date-fns/locale'
-import { Calendar as CalendarIcon } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { createEvent } from '@/_api/create-event'
 import { EventForm, EventFormData } from '@/components/event-form'
 import { Pagination } from '@/components/pagination'
+import { SimpleHeader } from '@/components/simple-header'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -95,10 +95,7 @@ export function Dashboard() {
 
           <DialogContent>
             <DialogHeader>
-              <div className="flex items-center gap-4 align-middle text-zinc-200">
-                <CalendarIcon />
-                <span className="unde font-semibold">Adicionar evento</span>
-              </div>
+              <SimpleHeader title="Criar um evento" />
             </DialogHeader>
             <EventForm formId="create-event" onSubmit={onSubmit} />
 
