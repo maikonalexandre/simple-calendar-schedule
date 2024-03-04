@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-import { handleModalData, Modal } from '@/components/modal'
+import { EventFormData } from '@/components/event-form'
+import { Modal } from '@/components/modal'
 
 interface ProviderProps {
   children: ReactNode
@@ -8,10 +9,10 @@ interface ProviderProps {
 
 type ModalProps = {
   visible: boolean
-  data: handleModalData | undefined
+  data: EventFormData | undefined
 }
 interface ConfirmationProps {
-  openModal: (data?: handleModalData) => void
+  openModal: (data?: EventFormData) => void
   closeModal: () => void
 }
 
@@ -23,7 +24,7 @@ export const ModalProvider = ({ children }: ProviderProps) => {
     data: undefined,
   })
 
-  const openModal = (data?: handleModalData) => {
+  const openModal = (data?: EventFormData) => {
     setModalConfig(() => {
       return { visible: true, data }
     })
