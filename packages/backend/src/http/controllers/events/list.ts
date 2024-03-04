@@ -35,7 +35,7 @@ export async function listEvents(request: FastifyRequest, reply: FastifyReply) {
             format(event.startedAt, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd'),
         )
 
-        return { day, eventos: dayEvents }
+        return { day, events: dayEvents }
       })
 
       reply.code(200).send(refactoredEventsByDaysInterval)
