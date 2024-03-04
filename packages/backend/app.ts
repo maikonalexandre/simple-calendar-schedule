@@ -1,10 +1,11 @@
 import Fastify from 'fastify'
 import { ZodError } from 'zod'
-import { appRoutes } from './src/http/controllers/users/routes'
+
 import fastifyJwt from '@fastify/jwt'
 import { env } from './src/env'
-import { eventRoutes } from './src/http/controllers/events/routes'
 import cors from '@fastify/cors'
+import { usersRoutes } from './src/http/routes/users'
+import { eventRoutes } from './src/http/routes/events'
 
 export const app = Fastify()
 
@@ -17,7 +18,7 @@ app.register(cors, {
   methods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
 })
 
-app.register(appRoutes)
+app.register(usersRoutes)
 app.register(eventRoutes)
 
 app.setErrorHandler((error, _, reply) => {
