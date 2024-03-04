@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 import { addMinutesAndHoursToDate } from '@/utils'
 
-import { DatePicker } from './date-picker'
+import { DatePicker } from './ui/date-picker'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 
@@ -49,21 +49,18 @@ const schema = z
     },
   )
 
-export type handleModalData = z.infer<typeof schema>
-export interface onSubmitModalData extends handleModalData {
-  id: string
-}
+export type EventFormData = z.infer<typeof schema>
 
 export function EventForm({
   formId,
   onSubmit,
   values,
 }: {
-  onSubmit: (params: handleModalData) => void
-  values?: handleModalData
+  onSubmit: (data: EventFormData) => void
+  values?: EventFormData
   formId: string
 }) {
-  const fieldState = useForm<handleModalData>({
+  const fieldState = useForm<EventFormData>({
     resolver: zodResolver(schema),
     values,
   })
