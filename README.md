@@ -51,6 +51,7 @@ yarn install
 3. Setup backend:
 
 ```bash
+cd packages/backend
 # run 
 npx prisma generate
 # and
@@ -60,7 +61,7 @@ npx prisma migrate dev --name init
 4. Run backend:
 
 ```bash
-#run
+#on root directory run or dev on backend directory
 npm backend
 # or
 pnpm backend
@@ -71,7 +72,7 @@ yarn backend
 5. Run frontend:
 
 ```bash
-#run
+#run on root directory or dev on frontend directory
 npm front end
 # or
 pnpm front end
