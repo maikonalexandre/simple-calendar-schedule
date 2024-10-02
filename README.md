@@ -29,7 +29,7 @@
 You will need:
 
 - [Node.js 18+ (recommended 20 LTS)](https://nodejs.org/en/).
-- [Git](https://git-scm.com/).
+- [Git](https://git-scm.com/)
 
 1. Clone this repo locally:
 
